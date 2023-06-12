@@ -1,0 +1,65 @@
+
+<h3> Template Driven Form Email Validation</h3>
+
+<p *ngIf ="isValidFormSubmitted" [ngClass] = "'success'">
+    Submitted Form Successfully
+</p>
+<form  #userForm ="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+    <table>
+        <tr>
+            <td>Primary Email:</td>
+            <td>
+                <input name ="primaryEmail" [ngModel]="user.primaryEmail"  required email #prmEmail="ngModel">
+            
+            <div *ngIf = "prmEmail.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                <div *ngIf = "prmEmail.errors.required">
+                    Primary Email required.
+                </div>
+                <div *ngIf = "prmEmail.errors.email">
+                    Primary Email not valid.
+                </div>
+
+            </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Secondary Email:</td>
+            <td>
+                <input name = "secondaryEmail" [ngModel]="user.secondaryEmail" required  email  #scdEmail=ngModel>
+
+                <div *ngIf = "scdEmail.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                    <div *ngIf = "scdEmail.errors.required">
+                        Scondary Email required.
+                    </div>
+                    <div *ngIf = "scdEmail.errors.email">
+                        Secondary Email not valid.
+                    </div>
+    
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Official Email:</td>
+            <td>
+                <input name = "officialEmail" [ngModel]="user.officialEmail" required email  #officEmail=ngModel>
+
+                <div *ngIf = "officEmail.errors && userForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                    <div *ngIf = "officEmail.errors.required">
+                        official Email required.
+                    </div>
+                    <div *ngIf = "officEmail.errors.email">
+                        Official  Email not valid.
+                    </div>
+              </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan = "2">
+                <button>Submit</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
